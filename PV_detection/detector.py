@@ -5,7 +5,7 @@ import numpy as np
 from keras.models import load_model
 from utils import load_cell_image, normalize
 import sys
-sys.path.append('/home/mawdoo3/Muhystuff/research/PV_images/PV_detection')
+sys.path.append('/home/mawdoo3/Muhystuff/research/PV_images/PV_thermal')
 from config import config
 
 class Detector(object):
@@ -22,7 +22,6 @@ class Detector(object):
                 image = normalize(test)
                 hey = np.expand_dims(image, axis=-1)
                 vecs = np.expand_dims(hey, axis=0)
-#                import pdb;pdb.set_trace()
                 pred = self.model.predict(vecs)
                 if pred >= 0.5:
                     return 'Defetected'

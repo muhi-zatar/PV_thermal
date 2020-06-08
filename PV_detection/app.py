@@ -1,7 +1,10 @@
 import os
+import json
 import numpy as np
 from flask import Flask, request, Response
 from detector import Detector
+import sys
+sys.path.append('/home/mawdoo3/Muhystuff/research/PV_images/PV_thermal')
 from config import config
 
 #detect = None
@@ -9,21 +12,20 @@ from config import config
 app = Flask(__name__)
 
 @app.route('/detector', methods=['GET','POST'])
-    #       params=[Param(name='image', required=True, type=bytes, source=['body-data'])])
 
 def detector():
     global detect
     image = request.args.get('path', None)
-    #import pdb;pdb.set_trace()
-    #nparr = np.fromstring(r.data, np.uint8)
     ans = detect.infer(image)
-    print('here')
-    return ans
-    #return 'why hello there'
+    result = json.dumps({'status': 'SUCCESS',
+                         'result': ans})
+    return (result, 200)
 
 
 if __name__ == '__main__':
     global detect
     detect = Detector(config['model_path'])
+    #detect = Detector('PV_detection/models/PV_detector.h5')
+    #import pdb;pdb.set_trace()
     print('Model Loaded')
     app.run(debug=True)
