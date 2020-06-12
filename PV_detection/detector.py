@@ -5,7 +5,7 @@ import numpy as np
 from keras.models import load_model
 from utils import load_cell_image, normalize
 import sys
-sys.path.append('/home/mawdoo3/Muhystuff/research/PV_images/PV_thermal')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import config
 
 class Detector(object):
@@ -24,15 +24,6 @@ class Detector(object):
                 vecs = np.expand_dims(hey, axis=0)
                 pred = self.model.predict(vecs)
                 if pred >= 0.5:
-                    return 'Defetected'
+                    return 'PV module is Defetected'
                 else:
-                    return 'Not Defected'
-
-#if __name__ == '__main__':
-#    detector = Detector(config['model_path'])
-#    path = '/home/mawdoo3/Muhystuff/research/PV_images/elpv-dataset/images/'
-#    ans = detector.infer(os.path.join(path, 'cell0023.png'))
-#    print(ans)
-#    #for i in os.listdir(path):
-#    #    ans = detector.infer(os.path.join(path,i))
-#    #    print(ans)
+                    return 'PV module is not Defected'

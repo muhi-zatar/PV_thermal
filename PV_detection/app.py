@@ -4,10 +4,8 @@ import numpy as np
 from flask import Flask, request, Response
 from detector import Detector
 import sys
-sys.path.append('/home/mawdoo3/Muhystuff/research/PV_images/PV_thermal')
+#sys.path.append('/home/mawdoo3/Muhystuff/research/PV_images/PV_thermal')
 from config import config
-
-#detect = None
 
 app = Flask(__name__)
 
@@ -25,7 +23,5 @@ def detector():
 if __name__ == '__main__':
     global detect
     detect = Detector(config['model_path'])
-    #detect = Detector('PV_detection/models/PV_detector.h5')
-    #import pdb;pdb.set_trace()
     print('Model Loaded')
     app.run(debug=True)
