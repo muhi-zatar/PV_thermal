@@ -24,6 +24,6 @@ class Detector(object):
                 vecs = np.expand_dims(hey, axis=0)
                 pred = self.model.predict(vecs)
                 if pred >= 0.5:
-                    return 'PV module is Defetected'
+                    return 'PV Cell is Defetected'
                 else:
-                    return 'PV module is not Defected'
+                    return 'PV Cell is not Defected'
